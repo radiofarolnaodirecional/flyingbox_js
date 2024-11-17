@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{color: white; background-color: black; box-sizing: border-box;}
+        a{color: blueviolet;}
+        h2{
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .lg{
+            width: 120px;
+            display: inline;
+        }
+        .ex-el, .ex-el>div{
+            width: 300px;
+            height: 50px;
+            background-color: rgba(210, 162, 30, 0.127);
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .division{
+            background-color: rgb(33, 33, 33);
+            height:1px;
+            margin-top:10px;
+        }
+        .sp-tag{
+            color: red;
+        }
+        .sp-txt{
+            color: green;
+        }
+        .sp-atr{
+            color: orange;
+        }
+        .sp-com{
+            color: #75757571;
+        }
+        .sp-elm{
+            color: #c7c7c7;
+        }
+    </style>
+</head>
+<body>
+    <h2>flying box js<img class="lg" src="static/img/lg.svg" alt=""></h2>
+    <p>A little simple, very simple (almost non-existent) javascript 'module', just to add floating info boxes, cause why use title="" when you can have a box that appears on hover and follow the mouse movement, that is much cooler.</p>
+    <h4>installation:</h4>
+    <p><a href="/flbx.js">file.js</a></p>
+    <h4>example usage:</h4>
+    <p>most simple:</p>
+    <code>
+        <span class="sp-tag">&lt;div</span> <span class="sp-atr">data-flying_box</span> <br> &nbsp;&nbsp;&nbsp;&nbsp; <span class="sp-atr">data-flbx_text=</span><span class="sp-txt">"Some info!"</span><span class="sp-tag">&gt;</span> <span class="sp-elm"> Element </span> <br><span class="sp-tag">&lt;/div&gt;</span>
+    </code>
+    <p>result:</p>
+    <div class="ex-el" 
+        data-flying_box
+        data-flbx_text="Some info!"
+    > <div>Element</div> </div>
+    <div class="division"></div>
+    <p>other optional params:</p>
+    <code>
+        <span class="sp-tag">&lt;div</span> <span class="sp-atr">data-flying_box=<span class="sp-txt">"1"</span></span> <i class="sp-com">&lt;!-- same as just 'flying_box' --&gt;</i> <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; <span class="sp-atr">data-flbx_text=</span><span class="sp-txt">"Some other info!"</span> <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; <span class="sp-atr">data-flbx_move_trans_ms=</span><span class="sp-txt">"0"</span> <i class="sp-com"> &lt;!-- add transition in milliseconds --&gt; </i> <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; <span class="sp-atr">data-flbx_offset_x=</span><span class="sp-txt">"140"</span> <i class="sp-com"> &lt;!-- add X offset (horizontal) --&gt; </i> <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; <span class="sp-atr">data-flbx_offset_y=</span><span class="sp-txt">"0"</span> <i class="sp-com"> &lt;!-- add Y offset (vertical) --&gt; </i> <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; <span class="sp-atr">data-flbx_fontfamily=</span><span class="sp-txt">"sans-serif"</span> <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; <span class="sp-atr">data-flbx_auto_adj=</span><span class="sp-txt">"true"</span> <i class="sp-com"> &lt;!-- auto offset (default=true) --&gt; </i> <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; <span class="sp-atr">data-flbx_remove_std_style=</span><span class="sp-txt">"false"</span> <i class="sp-com"> &lt;!-- when true will remove all the box style, so its possible to fully custom the element (the box class is "flbx-1" or "flbx-2") --&gt; </i> <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; <span class="sp-atr">data-flbx_box_id=</span><span class="sp-txt">"bx1"</span> <i class="sp-com"> &lt;!-- add id to the specific box --&gt; </i>  <br>
+        <span class="sp-tag">&gt;</span> <span class="sp-elm"> Element </span> <br><span class="sp-tag">&lt;/div&gt;</span>
+    </code>
+    <p>result:</p>
+    <div class="ex-el" 
+        data-flying_box
+        data-flbx_text="Some other info!"
+        data-flbx_move_trans_ms="0"
+        data-flbx_offset_x="140"
+        data-flbx_offset_y="0"
+        data-flbx_fontfamily="sans-serif"
+        data-flbx_auto_adj="true"
+        data-flbx_remove_std_style="false"
+        data-flbx_box_id="bx1"
+    > <div>Element</div> </div>
+    <div class="division"></div>
+    <p>other box style:</p>
+    <code>
+        <span class="sp-tag">&lt;div</span> <span class="sp-atr">data-flying_box=</span><span class="sp-txt">"2"</span> <i class="sp-com">&lt;!-- other box style (2). just a static horizontally centered box. The element need to have a position style (relative, absolute..) --&gt;</i> <br> &nbsp;&nbsp;&nbsp;&nbsp; <span class="sp-atr">data-flbx_text=</span><span class="sp-txt">"A warning!"</span><span class="sp-tag">&gt;</span> <span class="sp-elm"> Element </span> <br><span class="sp-tag">&lt;/div&gt;</span>
+    </code>
+    <p>result:</p>
+    <div class="ex-el" 
+        data-flying_box="2"
+        data-flbx_text="A warning!"
+        style="position: relative;"
+    > <div>Element</div> </div>
+    <div class="division"></div>
+    <p>other params for box style 2:</p>
+    <code>
+        <span class="sp-tag">&lt;div</span> <span class="sp-atr">data-flying_box=<span class="sp-txt">"2"</span></span>  <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; <span class="sp-atr">data-flbx_text=</span><span class="sp-txt">"A warning!"</span> <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; <span class="sp-atr">data-flbx_box2_pos=</span><span class="sp-txt">"bottom"</span> <i class="sp-com"> &lt;!-- position for the box style 2. ('bottom' or 'top'. default=top) --&gt; </i> <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; <span class="sp-atr">data-flbx_move_trans_ms=</span><span class="sp-txt">"300"</span>  <br>
+        <span class="sp-tag">&gt;</span> <span class="sp-elm"> Element </span> <br><span class="sp-tag">&lt;/div&gt;</span>
+    </code>
+    <p>result:</p>
+    <div class="ex-el" 
+        data-flying_box="2"
+        data-flbx_text="A warning!"
+        data-flbx_box2_pos="bottom"
+        data-flbx_move_trans_ms="300"
+        style="position: relative; margin-bottom: 50px;"
+    > <div>Element</div> </div>
+<script src="flbx.js"></script>
+</body>
+</html>

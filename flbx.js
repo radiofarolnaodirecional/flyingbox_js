@@ -1,3 +1,9 @@
+/*
+
+version 0.0.2
+
+*/
+
 const FlBxMain = (()=>{
     document.addEventListener('DOMContentLoaded', () => {
         
@@ -27,6 +33,7 @@ const FlBxMain = (()=>{
             var cliOffX = 0
             var cliOffY = 0
             var fontFamily = 'Trebuchet MS, sans-serif'
+            var box2widh = null
             var removeStdStyle = false
             if (e.dataset.flbx_offset_x) {
                 cliOffX = parseInt(e.dataset.flbx_offset_x)
@@ -49,6 +56,8 @@ const FlBxMain = (()=>{
             const boxText = e.dataset.flbx_text
             const inTxt = document.createTextNode(boxText)
             const newBox = document.createElement('div')
+
+            box2widh = inTxt.length
 
             // add id to the box
             if (e.dataset.flbx_box_id) {
@@ -80,7 +89,7 @@ const FlBxMain = (()=>{
                 offsetY = 0
             }
 
-            setBoxStyle(newBox, fbValue, cliOffX, cliOffY, fontFamily, removeStdStyle, box2position)
+            setBoxStyle(newBox, fbValue, cliOffX, cliOffY, fontFamily, removeStdStyle, box2position, box2widh)
             addListeners(e, newBox, offsetX, offsetY, cliOffX, cliOffY, fbValue)
         })
 
@@ -104,14 +113,39 @@ const FlBxMain = (()=>{
             })
             if (value==1){
                 e.addEventListener('mousemove', (evt) => {
-                    box.style.left = evt.pageX + offsetX + cliOffX - box.clientWidth / 2 + 'px'
+
+                    // screen border limit ajdust --( just horizontally)
+                    var newX = evt.pageX + offsetX + cliOffX - box.clientWidth / 2
+                    //var newY = evt.pageY + offsetY + cliOffY - box.clientHeight / 2
+
+                    /* standard Y *///////////////
                     box.style.top = evt.pageY + offsetY + cliOffY - box.clientWidth / 2 + 'px'
+
+                    const boxWidth = box.clientWidth
+                    //const boxHeight = box.clientHeight
+                    const screenWidth = window.innerWidth
+                    //const screenHeight = window.innerHeight
+
+                    if (newX < 0) {
+                        newX = 0
+                    } else if (newX + boxWidth > screenWidth) {
+                        newX = screenWidth - boxWidth
+                    }
+
+                    // if (newY < 0) {
+                    //     newY = 0
+                    // } else if (newY + boxHeight > screenHeight) {
+                    //     newY = screenHeight - boxHeight
+                    // }
+
+                    box.style.left = `${newX}px`
+                    // box.style.top = `${newY}px`
                 })
             }
         }
 
         /* stylize the box created according to parameter */
-        function setBoxStyle(e, n, cliOffX, cliOffY, fontFamily, removeStdStyle, box2position) {
+        function setBoxStyle(e, n, cliOffX, cliOffY, fontFamily, removeStdStyle, box2position, box2widh) {
 
             if (removeStdStyle) {return}
 
@@ -146,6 +180,9 @@ const FlBxMain = (()=>{
                 e.style.color = '#e4e4e4'
                 e.style.pointerEvents = 'none'
                 e.style.opacity = '0'
+                e.style.width = `${box2widh + 3}ch`
+                e.style.height = '3ch'
+                e.style.textAlign = 'center'
                 e.style.transition = `${moveTransMs}ms`
                 if (box2position=='top') {
                     e.style.top = `calc(-25px + ${cliOffX}px)`
