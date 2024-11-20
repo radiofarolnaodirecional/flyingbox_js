@@ -214,3 +214,36 @@ const FlBxMain = (()=>{
     })
 })()
 
+// implement by function
+
+/*
+<div class="myinfobox"> Info </div>
+<div onmouseover="bxappear('.myinfobox')" onmouseleave="bxdisappear('.myinfobox')"> Element </div>
+*/
+
+var mouseMoveHdl = null
+function bxappear(boxSelector, offsetX = 45, offsetY = 35) {
+    const box = document.querySelector(boxSelector);
+    if (!box) return;
+    
+    box.style.display = "block";
+
+    mouseMoveHdl = (e) => {
+        box.style.left = e.pageX + offsetX - box.clientWidth / 2 + "px";
+        box.style.top = e.pageY + offsetY - box.clientHeight / 2 + "px";
+    }
+    
+    document.addEventListener('mousemove', mouseMoveHdl)
+}
+
+function bxdisappear(boxSelector) {
+    const box = document.querySelector(boxSelector);
+    if (!box) return;
+
+    box.style.display = "none";
+
+    if (mouseMoveHdl) {
+        document.removeEventListener('mousemove', mouseMoveHdl)
+        mouseMoveHdl = null
+    }
+}
